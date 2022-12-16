@@ -5,8 +5,8 @@ class Event(models.Model):
     date = models.DateField(null=False, blank=False)
     name = models.CharField(null=False, blank=False, max_length=255)
     description = models.TextField(null=True, blank=True, default=None)
-    location = models.CharField(null=True, blank=True, default=None)
-    category = models.CharField(null=False, blank=False, default="Life")
+    location = models.CharField(null=True, blank=True, default=None, max_length=255)
+    category = models.CharField(null=False, blank=False, default="Life", max_length=255)
 
 
 class Person(models.Model):
