@@ -7,14 +7,12 @@ class Event(models.Model):
     description = models.TextField(null=True, blank=True, default=None)
     location = models.CharField(null=True, blank=True, default=None, max_length=255)
     category = models.CharField(null=False, blank=False, default="Life", max_length=255)
+    people = models.ManyToManyField("Person")
 
 
 class Person(models.Model):
     name = models.CharField(null=False, blank=False, max_length=255)
     sex = models.CharField(null=False, blank=False, max_length=10)
 
-
-class PersonEvent(models.Model):
-    person = models.ForeignKey("Person", on_delete=models.CASCADE)
-    event = models.ForeignKey("Event", on_delete=models.CASCADE)
-
+    def __str__(self):
+        return self.name
