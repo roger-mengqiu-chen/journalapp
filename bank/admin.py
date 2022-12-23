@@ -4,16 +4,17 @@ from bank.models import Transaction, Category
 from django.contrib.admin.views.main import ChangeList
 
 
-# Register your models here.
 class TransactionAdmin(ImportExportModelAdmin, admin.ModelAdmin):
     list_display = ("get_transaction_date",
-                    "get_transaction_merchant",
-                    "get_transaction_debit",
-                    "get_transaction_credit",
-                    "get_transaction_category")
-    list_display_links = ("get_transaction_merchant",)
+                    "merchant",
+                    "debit",
+                    "credit",
+                    "category")
+    list_display_links = ("merchant",)
+    search_fields = ["merchant"]
+    list_per_page = 15
 
-
+    list_editable = ["category"]
 
 
 class CategoryAdmin(admin.ModelAdmin):
