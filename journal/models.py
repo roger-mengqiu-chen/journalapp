@@ -25,7 +25,7 @@ class Event(models.Model):
     name = models.CharField(null=False, blank=False, max_length=255)
     description = models.TextField(null=True, blank=True, default=None)
     location = models.CharField(null=True, blank=True, default=None, max_length=255)
-    category = models.ForeignKey("Category", default=None, on_delete=models.PROTECT)
+    category = models.ForeignKey("Category", null=True, blank=True, default=None, on_delete=models.SET_DEFAULT)
     people = models.ManyToManyField(Person)
 
     def __str__(self):
