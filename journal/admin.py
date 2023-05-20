@@ -1,4 +1,5 @@
 from django.contrib import admin
+from django.utils.html import format_html
 
 from journal.models import Event, Person, Category, PersonEvent
 
@@ -10,10 +11,14 @@ class PersonEventInlineFormset(admin.TabularInline):
 
 
 class EventAdmin(admin.ModelAdmin):
-    search_fields = ["people__name"]
-    autocomplete_fields = ["people"]
-    list_display = ('get_event_date', 'name', 'get_event_description', 'get_event_location', 'get_event_people')
+    autocomplete_fields = ["people", "category"]
+    list_display = ('get_event_date', 'name', 'description', 'get_event_location', 'get_event_people')
     inlines = [PersonEventInlineFormset]
+
+    def action(self, obj):
+        return format_html('<a class="btn" href="/admin/journal/event/{}/delete/">Delete</a>', obj.id)
+
+    list_display = ('__str__', 'action')
 
 
 class PersonAdmin(admin.ModelAdmin):
@@ -22,7 +27,7 @@ class PersonAdmin(admin.ModelAdmin):
 
 
 class CategoryAdmin(admin.ModelAdmin):
-    pass
+    search_fields = ["name"]
 
 
 admin.site.register(Event, EventAdmin)
