@@ -37,7 +37,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'bank',
     'journal',
-    'import_export'
+    'import_export',
+    'django_select2',
 ]
 
 MIDDLEWARE = [

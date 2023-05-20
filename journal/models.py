@@ -2,12 +2,31 @@ from django.db import models
 from django.contrib import admin
 
 
+
+class Person(models.Model):
+    name = models.CharField(null=False, blank=False, max_length=255)
+    sex = models.CharField(null=False, blank=False, max_length=10)
+    phone_number = models.CharField(null=True, blank=True, max_length=50)
+    address = models.CharField(null=True, blank=True, max_length=255)
+
+    class Meta:
+        verbose_name_plural = "People"
+
+    def __str__(self):
+        return self.name
+
+    @admin.display(description="Sex")
+    def get_person_sex(self):
+        return self.sex
+
+
 class Event(models.Model):
     date = models.DateField(null=False, blank=False)
     name = models.CharField(null=False, blank=False, max_length=255)
     description = models.TextField(null=True, blank=True, default=None)
     location = models.CharField(null=True, blank=True, default=None, max_length=255)
     category = models.ForeignKey("Category", default=None, on_delete=models.PROTECT)
+    people = models.ManyToManyField(Person)
 
     def __str__(self):
         return self.name
@@ -32,23 +51,6 @@ class Event(models.Model):
 
     def get_event_category(self):
         return self.category
-
-
-class Person(models.Model):
-    name = models.CharField(null=False, blank=False, max_length=255)
-    sex = models.CharField(null=False, blank=False, max_length=10)
-    phone_number = models.CharField(null=True, blank=True, max_length=50)
-    address = models.CharField(null=True, blank=True, max_length=255)
-
-    class Meta:
-        verbose_name_plural = "People"
-
-    def __str__(self):
-        return self.name
-
-    @admin.display(description="Sex")
-    def get_person_sex(self):
-        return self.sex
 
 
 class PersonEvent(models.Model):
