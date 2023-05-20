@@ -12,13 +12,11 @@ class PersonEventInlineFormset(admin.TabularInline):
 
 class EventAdmin(admin.ModelAdmin):
     autocomplete_fields = ["people", "category"]
-    list_display = ('get_event_date', 'name', 'description', 'get_event_location', 'get_event_people')
+    list_display = ('get_event_date', 'name', 'description', 'location', 'get_people', 'action')
     inlines = [PersonEventInlineFormset]
 
     def action(self, obj):
         return format_html('<a class="btn" href="/admin/journal/event/{}/delete/">Delete</a>', obj.id)
-
-    list_display = ('__str__', 'action')
 
 
 class PersonAdmin(admin.ModelAdmin):
