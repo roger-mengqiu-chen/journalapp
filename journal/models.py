@@ -3,7 +3,9 @@ from django.contrib import admin
 
 
 class Person(models.Model):
-    name = models.CharField(null=False, blank=False, max_length=255)
+    nick_name = models.CharField(null=False, blank=False, max_length=255)
+    first_name = models.CharField(null=False, blank=False, max_length=255)
+    last_name = models.CharField(null=True, blank=True, max_length=255)
     sex = models.CharField(null=False, blank=False, max_length=10)
     phone_number = models.CharField(null=True, blank=True, max_length=50)
     address = models.CharField(null=True, blank=True, max_length=255)
@@ -12,11 +14,7 @@ class Person(models.Model):
         verbose_name_plural = "People"
 
     def __str__(self):
-        return self.name
-
-    @admin.display(description="Sex")
-    def get_person_sex(self):
-        return self.sex
+        return f"{self.first_name} {self.last_name if self.last_name else ''}"
 
 
 class Event(models.Model):

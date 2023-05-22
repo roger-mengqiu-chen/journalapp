@@ -20,7 +20,7 @@ class EventAdmin(admin.ModelAdmin):
 
 
 class PersonAdmin(admin.ModelAdmin):
-    list_display = ('name', 'get_person_sex')
+    list_display = ('nick_name', 'sex')
     search_fields = ["name"]
 
 
