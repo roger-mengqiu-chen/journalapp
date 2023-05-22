@@ -125,4 +125,7 @@ STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-from .settings_local import *
+try:
+    from .settings_local import *
+except ModuleNotFoundError:
+    pass
