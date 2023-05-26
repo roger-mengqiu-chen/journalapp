@@ -43,7 +43,7 @@ class PersonEvent(models.Model):
 
 
 class Category(models.Model):
-    name = models.CharField(null=False, blank=False, max_length=255)
+    name = models.CharField(null=False, blank=False, max_length=255, unique=True)
 
     class Meta:
         verbose_name_plural = "Categories"
