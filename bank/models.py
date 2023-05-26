@@ -24,7 +24,10 @@ class Transaction(models.Model):
 
 
 class Category(models.Model):
+    types = ["EXPENSE", "INCOME"]
+
     name = models.CharField(null=False, blank=False, max_length=255)
+    type = models.CharField(max_length=10, choices=[(x, x) for x in types], default="EXPENSE")
 
     class Meta:
         verbose_name_plural = "Categories"
