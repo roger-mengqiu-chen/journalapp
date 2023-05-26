@@ -5,7 +5,7 @@ from bank.models import Transaction, Category
 
 
 class TransactionAdmin(ImportExportModelAdmin, admin.ModelAdmin):
-    list_display = ("get_transaction_date",
+    list_display = ("transaction_date",
                     "merchant",
                     "debit",
                     "credit",
@@ -17,6 +17,7 @@ class TransactionAdmin(ImportExportModelAdmin, admin.ModelAdmin):
     list_per_page = 15
     list_filter = ["category"]
     list_editable = ["category"]
+    sortable_by = ["transaction_date", "merchant", "debit", "credit", "category"]
 
     def action(self, obj):
         return format_html('<a class="btn" href="/admin/bank/transaction/{}/delete/">Delete</a>', obj.id)
