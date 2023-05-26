@@ -15,7 +15,7 @@ class TransactionAdmin(ImportExportModelAdmin, admin.ModelAdmin):
     search_fields = ["merchant"]
     autocomplete_fields = ["category"]
     list_per_page = 15
-
+    list_filter = ["category"]
     list_editable = ["category"]
 
     def action(self, obj):
@@ -23,7 +23,10 @@ class TransactionAdmin(ImportExportModelAdmin, admin.ModelAdmin):
 
 
 class CategoryAdmin(admin.ModelAdmin):
-    search_fields = ["category"]
+    search_fields = ["name"]
+    list_display = ("name", "type")
+    list_filter = ["type"]
+    sortable_by = ["name"]
 
 
 admin.site.register(Transaction, TransactionAdmin)
