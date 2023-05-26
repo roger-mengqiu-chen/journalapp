@@ -2,9 +2,10 @@ from django.db import models
 from django.contrib import admin
 
 
-
 class Person(models.Model):
-    name = models.CharField(null=False, blank=False, max_length=255)
+    nick_name = models.CharField(null=False, blank=False, max_length=255)
+    first_name = models.CharField(null=False, blank=False, max_length=255)
+    last_name = models.CharField(null=True, blank=True, max_length=255)
     sex = models.CharField(null=False, blank=False, max_length=10)
     phone_number = models.CharField(null=True, blank=True, max_length=50)
     address = models.CharField(null=True, blank=True, max_length=255)
@@ -13,11 +14,7 @@ class Person(models.Model):
         verbose_name_plural = "People"
 
     def __str__(self):
-        return self.name
-
-    @admin.display(description="Sex")
-    def get_person_sex(self):
-        return self.sex
+        return f"{self.first_name} {self.last_name if self.last_name else ''}"
 
 
 class Event(models.Model):
@@ -35,22 +32,9 @@ class Event(models.Model):
     def get_event_date(self):
         return self.date.strftime("%Y-%m-%d")
 
-    @admin.display(description="Description")
-    def get_event_description(self):
-        return self.description
-
-    @admin.display(description="Location")
-    def get_event_location(self):
-        return self.location
-
     @admin.display(description="People")
-    def get_event_people(self):
-        person_ids = list(PersonEvent.objects.filter(event=self).values_list("person_id", flat=True))
-        people = list(Person.objects.filter(id__in=person_ids))
-        return people
-
-    def get_event_category(self):
-        return self.category
+    def get_people(self):
+        return ", ".join([person.name for person in list(self.people.all())])
 
 
 class PersonEvent(models.Model):
@@ -59,7 +43,7 @@ class PersonEvent(models.Model):
 
 
 class Category(models.Model):
-    name = models.CharField(null=False, blank=False, max_length=255)
+    name = models.CharField(null=False, blank=False, max_length=255, unique=True)
 
     class Meta:
         verbose_name_plural = "Categories"
