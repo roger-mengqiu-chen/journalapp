@@ -1,5 +1,7 @@
 # journalapp
 
+ ![Backend Build](https://github.com/roger-mengqiu-chen/journalapp/actions/workflows/django.yml/badge.svg?branch=main)
+
 A simple application to help myself manage data from life (e.g., bank transactions, important events, people I met, etc.)
 
 I am learning Django through this project. 
