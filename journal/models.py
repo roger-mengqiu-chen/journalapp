@@ -37,11 +37,6 @@ class Event(models.Model):
         return ", ".join([person.name for person in list(self.people.all())])
 
 
-class PersonEvent(models.Model):
-    person = models.ForeignKey(Person, null=False, blank=False, on_delete=models.CASCADE)
-    event = models.ForeignKey(Event, null=False, blank=False, on_delete=models.CASCADE)
-
-
 class Category(models.Model):
     name = models.CharField(null=False, blank=False, max_length=255, unique=True)
 
