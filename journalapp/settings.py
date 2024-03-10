@@ -39,7 +39,7 @@ INSTALLED_APPS = [
     'journal',
     'import_export',
     'django_select2',
-    'report'
+    'note',
 ]
 
 MIDDLEWARE = [
