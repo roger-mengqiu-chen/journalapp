@@ -1,3 +1,14 @@
-from django.shortcuts import render
+def post_note(request):
+    pass
 
-# Create your views here.
+
+def get_notes(request):
+    pass
+
+
+def delete_note(request):
+    pass
+
+
+def update_note(request):
+    pass
