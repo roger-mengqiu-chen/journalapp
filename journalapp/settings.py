@@ -36,8 +36,6 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
-    'bank',
-    'journal',
     'import_export',
     'django_select2',
     'note',
