@@ -1,14 +1,12 @@
-def post_note(request):
-    pass
+from rest_framework.decorators import api_view
+from rest_framework.response import Response
 
 
-def get_notes(request):
-    pass
+@api_view(['GET', 'POST', 'DELETE', 'PUT'])
+def note(request, note_id):
+    return Response({'note': 'note'})
 
 
-def delete_note(request):
-    pass
-
-
-def update_note(request):
-    pass
+@api_view(['GET'])
+def notes(request, page_number):
+    return Response({'notes': 'notes'})
