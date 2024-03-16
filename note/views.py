@@ -19,6 +19,11 @@ def note(request, note_id):
     elif request.method == 'DELETE':
         note.delete()
         return Response({'message': 'Note deleted'}, status=204)
+    
+
+@api_view(['POST'])
+def create_note():
+    return Response({'message': 'note created'})
 
 
 @api_view(['GET'])
