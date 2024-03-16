@@ -29,3 +29,14 @@ class Note(models.Model):
     def __str__(self):
         return self.title
 
+    def get_tags(self):
+        if self.tags.all():
+            return ', '.join([tag.name for tag in self.tags.all()])
+        else:
+            return ''
+    
+    def get_category(self):
+        if self.category:
+            return self.category.name
+        else:
+            return ''
