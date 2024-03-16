@@ -19,6 +19,13 @@ def note(request, note_id):
         note.delete()
         return Response({'message': 'Note deleted'}, status=204)
     
+    elif request.method == 'PUT':
+        serializer = NoteSerializer(note, data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        return Response(serializer.errors, status=400)
+    
 
 @api_view(['POST'])
 def create_note():
