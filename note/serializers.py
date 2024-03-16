@@ -23,6 +23,27 @@ class NoteSerializer(serializers.ModelSerializer):
         model = Note
         fields =  ['note_id', 'title', 'content', 'created_at', 
                    'updated_at', 'tags', 'category']
+        
+    def update(self, instance, validated_data):
+        # Get tags data and category data from validated_data
+        # Return [] if tags is not in validated_data
+        tags_data = validated_data.pop('tags', [])
+        # Return None if category is not in validated_data
+        category_data = validated_data.pop('category', None)
+
+        instance = super(NoteSerializer, self).update(instance, validated_data)
+
+        instance.tags.clear()
+        for tag_data in tags_data:
+            tag, created = Tag.objects.get_or_create(name=tag_data['name'])
+            instance.tags.add(tag)
+
+        if category_data is not None:
+            category, created = Category.objects.get_or_create(name=category_data['name'])
+            instance.category = category
+            instance.save()
+
+        return instance
 
 
 class NoteSummarySerializer(serializers.ModelSerializer):
