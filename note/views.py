@@ -1,9 +1,8 @@
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 
-from note.models import Note
-from note.note_services import get_note_by_id, delete_note_by_id
-from note.serializers import NoteSerializer
+from note.note_services import get_note_by_id, get_notes_by_page
+from note.serializers import NoteSerializer, NoteSummarySerializer
 
 
 @api_view(['GET', 'DELETE', 'PUT'])
@@ -28,4 +27,6 @@ def create_note():
 
 @api_view(['GET'])
 def notes(request, page_number):
-    return Response({'notes': 'notes'})
+    notes = get_notes_by_page(page_number, note_per_page=10)
+    res = NoteSummarySerializer(notes, many=True).data
+    return Response({'notes': res})
