@@ -1,0 +1,14 @@
+serivces:
+  db:
+    image: mysql:8.2
+    container_name: db
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: 
+      MYSQL_DATABASE: test_journalapp
+      MYSQL_USER: test
+      MYSQL_PASSWORD: test
+    ports:
+      - "3306:3306"
+    volumes:
+      - ./db:/var/lib/mysql
