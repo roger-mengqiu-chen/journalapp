@@ -41,3 +41,4 @@ class Note(models.Model):
             return self.category.name
         else:
             return ''
+        

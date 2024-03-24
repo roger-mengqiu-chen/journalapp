@@ -28,7 +28,11 @@ def note(request, note_id):
     
 
 @api_view(['POST'])
-def create_note():
+def create_note(request):
+    serializer = NoteSerializer(data=request.data)
+    if serializer.is_valid():
+        serializer.save()
+        return Response(serializer.data, status=201)
     return Response({'message': 'note created'})
 
 
