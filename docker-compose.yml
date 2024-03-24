@@ -4,7 +4,7 @@ services:
     container_name: db
     restart: always
     environment:
-      MYSQL_ALLOW_EMPTY_PASSWORD: true
+      MYSQL_ALLOW_EMPTY_PASSWORD: "true"
       MYSQL_USER: test
       MYSQL_PASSWORD: test
     ports:
