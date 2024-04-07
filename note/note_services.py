@@ -23,3 +23,9 @@ def get_notes_by_page(page_number, note_per_page=10):
         notes = paginator.page(paginator.num_pages)
 
     return notes
+
+
+def get_total_pages_of_notes(note_per_page=10):
+    notes = Note.objects.all()
+    paginator = Paginator(notes, note_per_page)
+    return paginator.num_pages
