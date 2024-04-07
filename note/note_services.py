@@ -26,15 +26,15 @@ def get_notes_by_page(page_number, note_per_page=10):
 
 
 def get_total_pages_of_notes(note_per_page=10):
-    notes = Note.objects.all()
+    notes = Note.objects.all().order_by('-updated_at')
     paginator = Paginator(notes, note_per_page)
     return paginator.num_pages
 
 
 def get_tags_and_notes_number():
     tags = Tag.objects.all()
-    tags_and_notes_number = []
+    tags_and_notes_number = {}
     for tag in tags:
         note_count = tag.note_set.count()
-        tags_and_notes_number.append({'tag': tag.name, 'notes_number': note_count})
+        tags_and_notes_number.update({tag.name: note_count})
     return tags_and_notes_number
