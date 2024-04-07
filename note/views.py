@@ -1,7 +1,7 @@
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 
-from note.note_services import get_note_by_id, get_notes_by_page
+from note.note_services import get_note_by_id, get_notes_by_page, get_tags_and_notes_number, get_total_pages_of_notes
 from note.serializers import NoteSerializer, NoteSummarySerializer
 
 
@@ -41,3 +41,14 @@ def notes(request, page_number):
     notes = get_notes_by_page(page_number, note_per_page=10)
     res = NoteSummarySerializer(notes, many=True).data
     return Response({'notes': res})
+
+
+@api_view(['GET'])
+def pages(request):
+    return Response({'pages': get_total_pages_of_notes()})
+
+
+@api_view(['GET'])
+def tags(request):
+    tags_data = get_tags_and_notes_number()
+    return Response({'tags': tags_data})

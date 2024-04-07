@@ -69,4 +69,11 @@ class NoteSummarySerializer(serializers.ModelSerializer):
     class Meta:
         model = Note
         fields = ['note_id', 'title', 'summary', 'created_at', 'updated_at']
-        
+
+
+class TagSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Tag
+        fields = '__all__'
+    
