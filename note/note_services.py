@@ -1,4 +1,4 @@
-from note.models import Note
+from note.models import Note, Tag
 from django.core.paginator import Paginator
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 
@@ -29,3 +29,12 @@ def get_total_pages_of_notes(note_per_page=10):
     notes = Note.objects.all()
     paginator = Paginator(notes, note_per_page)
     return paginator.num_pages
+
+
+def get_tags_and_notes_number():
+    tags = Tag.objects.all()
+    tags_and_notes_number = []
+    for tag in tags:
+        note_count = tag.note_set.count()
+        tags_and_notes_number.append({'tag': tag.name, 'notes_number': note_count})
+    return tags_and_notes_number
