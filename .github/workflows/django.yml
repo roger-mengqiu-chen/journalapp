@@ -30,7 +30,7 @@ jobs:
       run: docker-compose build
 
     - name: run docker
-      run: docker-compose up -d
+      run: docker compose up -d
       timeout-minutes: 10
     
     - name: Wait for MySQL
