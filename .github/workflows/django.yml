@@ -27,7 +27,7 @@ jobs:
         pip install -r requirements.txt
 
     - name: Build docker
-      run: docker-compose build
+      run: docker compose build
 
     - name: run docker
       run: docker compose up -d
