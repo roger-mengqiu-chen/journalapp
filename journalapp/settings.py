@@ -38,8 +38,22 @@ INSTALLED_APPS = [
     'rest_framework',
     'import_export',
     'django_select2',
+    'drf_spectacular',
     'note',
 ]
+
+SPECTACULAR_SETTINGS = {
+    'TITLE': 'Note API',
+    'DESCRIPTION': 'A backend app for managing notes',
+    'VERSION': '1.0.0',
+    'SERVE_INCLUDE_SCHEMA': False,
+}
+
+REST_FRAMEWORK = {
+    'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
+    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
+    'PAGE_SIZE': 10
+}
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
